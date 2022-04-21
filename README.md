@@ -1,2 +1,2 @@
-# Neo.BLS12_381.Native
+# Neo.Cryptography.BLS12_381.Native
 A native library of BLS
