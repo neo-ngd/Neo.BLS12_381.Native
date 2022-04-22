@@ -14,5 +14,5 @@ bson = "1.1.0"
 pairing = { version = "0.21", optional = true }
 
 [lib]
-name = "NeoCryptographyBLS12381Native"
+name = "Neo_Cryptography_BLS12_381_Native"
 crate-type = ["cdylib"]
