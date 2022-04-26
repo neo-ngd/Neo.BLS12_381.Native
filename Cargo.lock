@@ -3,7 +3,7 @@
 version = 3
 
 [[package]]
-name = "Neo_BLS12_381_Native"
+name = "Neo_Cryptography_BLS12_381_Native"
 version = "0.1.0"
 dependencies = [
  "bls12_381",
