@@ -3,23 +3,6 @@ use bls12_381::{pairing, G1Affine, G2Affine, G2Prepared, Gt};
 use bls_extern::*;
 
 #[no_mangle]
-pub extern "C" fn g1i_check(g1: *mut g1object) {
-    let g1_bytes = unsafe { g1.as_mut().expect("gti_check::invalid g1 ptr").val };
-    let g1i = G1Affine::identity();
-    println!("rust 里的g1i: {:?}", g1i.to_uncompressed());
-    let g1_test = bytes_to_g1(g1_bytes);
-    assert_eq!(g1i, g1_test);
-}
-
-#[no_mangle]
-pub extern "C" fn g1_i() -> *const g1object {
-    let g1_bytes = g1_to_bytes(G1Affine::identity());
-    let obj = g1object { val: g1_bytes };
-    let b = Box::new(obj);
-    return Box::into_raw(b);
-}
-
-#[no_mangle]
 pub extern "C" fn gt_add(gt1: *mut gtobject, gt2: *mut gtobject) -> *const gtobject {
     let gt1_bytes = unsafe { gt1.as_mut().expect("gt_add::invalid gt1 ptr").val };
     let gt2_bytes = unsafe { gt2.as_mut().expect("gt_add::invalid gt2 ptr").val };
@@ -46,7 +29,6 @@ pub extern "C" fn g1_g2_pairing(g1: *mut g1object, g2: *mut g2object) -> *const 
     let g1 = unsafe { g1.as_mut().expect("g1_g2_pairing::invalid g1 ptr").val };
     let g2 = unsafe { g2.as_mut().expect("g1_g2_pairing::invalid g2 ptr").val };
     let result = bytes_pairing(g1, g2);
-    println!("g1_g2_pairing result: {:?}", result); //这里删除
     let resultobj = gtobject { val: result };
     let b = Box::new(resultobj);
     Box::into_raw(b)
